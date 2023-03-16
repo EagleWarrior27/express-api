@@ -33,7 +33,6 @@ controllers.create = async (req,res) => {
 }
 
 controllers.get = async (req, res) => {
-  console.log(req.params.id);
   //Parámetro ID
   const { id } = req.params;
   
@@ -74,18 +73,23 @@ controllers.update = async (req, res) => {
   {
     where: { num_inventario: id}
   })
-  .then( function(data) {
-    res.status(200).json({
-      success:true,
-      message:"Equipo actualizado exitosamente",
-      data:data
-    });
+  .then(function(data) {
+    if(!data) {
+      res.status(404).json({
+        success:false,
+        message:"Equipo no registrado",
+      });
+    } else {
+      res.status(200).json({
+        success:true,
+        message:"Equipo actualizado exitosamente",
+      });
+    }
   })
   .catch(error => {
     res.status(500).json({
       success:true,
       message:"Error al actualizar equipo",
-      data:err
     });
   })
 }
@@ -99,17 +103,22 @@ controllers.delete = async (req, res) => {
     where: { num_inventario: id}
   })
   .then(function(data) {
-    res.status(200).json({
-      success:true,
-      message:"Equipo eliminado exitosamente",
-      data:data
-    });
+    if(!data) {
+      res.status(404).json({
+        success:false,
+        message:"Equipo no registrado",
+      });
+    } else {
+      res.status(200).json({
+        success:true,
+        message:"Equipo eliminado exitosamente",
+      });
+    }
   })
-  .error(err => {
+  .catch(err => {
     res.status(500).json({
       success:false,
       message:"Error al eliminar equipo",
-      data:err
     });
   })
 }
