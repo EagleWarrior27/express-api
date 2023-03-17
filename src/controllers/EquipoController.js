@@ -67,14 +67,14 @@ controllers.update = async (req, res) => {
     num_inventario: NumInventario,
     tipo: Tipo,
     marca: Marca,
-    model: Modelo,
+    modelo: Modelo,
     num_serie: NumSerie
   },
   {
     where: { num_inventario: id}
   })
   .then(function(data) {
-    if(!data) {
+    if(data == 0) {
       res.status(404).json({
         success:false,
         message:"Equipo no registrado",
@@ -103,7 +103,7 @@ controllers.delete = async (req, res) => {
     where: { num_inventario: id}
   })
   .then(function(data) {
-    if(!data) {
+    if(data == 0) {
       res.status(404).json({
         success:false,
         message:"Equipo no registrado",
@@ -199,6 +199,17 @@ controllers.prestamo = async (req, res) => {
     where: { num_inventario:NumInventario}
   })
   .then( function(data) {
+    if(data == 0) {
+      res.status(404).json({
+        success:false,
+        message:"Equipo no registrado",
+      });
+    } else {
+      res.status(200).json({
+        success:true,
+        message:"Préstamo de equipo exitoso",
+      });
+    }
     res.status(200).json({
       success:true,
       message:"Préstamo de equipo exitoso",
@@ -226,11 +237,17 @@ controllers.devolucion = async (req, res) => {
     where: { num_inventario:NumInventario}
   })
   .then(function(data) {
-    res.status(200).json({
-      success:true,
-      message:"Devolución de equipo exitoso",
-      data:data
-    });
+    if(data == 0) {
+      res.status(404).json({
+        success:false,
+        message:"Equipo no registrado",
+      });
+    } else {
+      res.status(200).json({
+        success:true,
+        message:"Devolución de equipo exitoso",
+      });
+    }
   })
   .catch(err => {
     res.status(500).json({
