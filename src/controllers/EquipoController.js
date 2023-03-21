@@ -193,7 +193,7 @@ controllers.prestamo = async (req, res) => {
 
   //UPDATE equipos SET disponibilidad = "En Préstamo" WHERE num_inventario = '';
   const data = await Equipo.update({
-    disponibilidad:'En Préstamo',
+    disponibilidad:'En Préstamo'
   },
   {
     where: { num_inventario:NumInventario}
@@ -231,7 +231,7 @@ controllers.devolucion = async (req, res) => {
   
   //UPDATE equipos SET disponibilidad='Disponible' WHERE num_inventario='';
   const data = await Equipo.update({
-    disponibilidad:'Disponible',
+    disponibilidad:'Disponible'
   },
   {
     where: { num_inventario:NumInventario}

@@ -136,7 +136,7 @@ controllers.rango = async (req, res) => {
       data:data
     });
   })
-  .catch(error => {
+  .catch(err => {
     res.status(500).json({
       success:false,
       message:"Error al obtener lista de préstamos por rango",
@@ -164,7 +164,7 @@ controllers.filtro = async (req, res) => {
           data:data
         });
       })
-      .catch(error => {
+      .catch(err => {
         res.status(500).json({
           success:false,
           message:"Error al obtener lista de préstamos por procedencia",
@@ -186,7 +186,7 @@ controllers.filtro = async (req, res) => {
           data:data
         });
       })
-      .catch(error => {
+      .catch(err => {
         res.status(500).json({
           success:false,
           message:"Error al obtener lista de préstamos por tipo de equipo",
